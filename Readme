@@ -1,0 +1,11 @@
+Proyecto: Embotellador
+tengo tipo de productos(marca) y tipo de categoria de vebida(refresco, vino, cerveza, etc...)
+
+DB: 
+- un producto es de una categoria
+- borrar una categoria no borra un producto y viceversa
+Back: 
+- base de datos de H2
+
+Front: 
+- maestro detalle

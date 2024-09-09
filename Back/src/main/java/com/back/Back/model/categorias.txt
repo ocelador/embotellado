@@ -1,0 +1,8 @@
+Long id
+String nombre(no null, min 1, max 50)
+String descripcion(min 1, max 50)
+Boolean IsAlcohlica(no null)
+Boolean Is00(no null)
+Boolean Is0Azucar(no null)
+Boolean IsNatural(no null)
+List<Productos> productos(OneToMany)

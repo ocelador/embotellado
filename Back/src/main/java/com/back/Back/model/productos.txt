@@ -1,0 +1,8 @@
+Long id
+String nombre(no null, min 1, max 50)
+String marca(no null, min 1, max 50)
+String sabor(no null, min 1, max 50)
+String Envase(no null, min 1, max 50)
+String descripcion(min 1, max 50)
+Long capacidad(litros)(no puede ser ni 0 ni negativo, no null)
+Categoria categoria (ManyToOne)
