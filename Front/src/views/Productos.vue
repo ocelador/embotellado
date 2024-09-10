@@ -75,7 +75,7 @@ export default {
         envase: '',
         capacidad: 0,
         descripcion: '',
-        categoria: null // Cambiado a objeto completo
+        categoria: null
       },
       isEditing: false
     };
@@ -103,7 +103,11 @@ export default {
     },
     async createProducto() {
       try {
-        const response = await axios.post('/api/productos', this.productoForm);
+        const response = await axios.post('/api/productos', this.productoForm, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
         this.productos.push(response.data);
         this.resetForm();
       } catch (error) {
@@ -112,7 +116,15 @@ export default {
     },
     async updateProducto() {
       try {
-        const response = await axios.put(`/api/productos/${this.productoForm.id}`, this.productoForm);
+        const response = await axios.put(
+          `/api/productos/${this.productoForm.id}`,
+          this.productoForm,
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        );
         const index = this.productos.findIndex(p => p.id === this.productoForm.id);
         if (index !== -1) {
           this.productos[index] = response.data;
@@ -133,7 +145,7 @@ export default {
     editProducto(producto) {
       this.productoForm = { 
         ...producto,
-        categoria: producto.categoria // Asegúrate de que el objeto producto tenga el campo categoria
+        categoria: producto.categoria
       };
       this.isEditing = true;
     },
@@ -146,7 +158,7 @@ export default {
         envase: '',
         capacidad: 0,
         descripcion: '',
-        categoria: null // Cambiado a objeto completo
+        categoria: null
       };
       this.isEditing = false;
     },
