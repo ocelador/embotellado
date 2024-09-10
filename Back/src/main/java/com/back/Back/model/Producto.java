@@ -47,6 +47,7 @@ public class Producto {
     private Long capacidad;
 
     @ManyToOne
+    @NotNull
     private Categoria categoria;
 
     // Getters y Setters

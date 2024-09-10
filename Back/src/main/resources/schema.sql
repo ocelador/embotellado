@@ -16,6 +16,6 @@ CREATE TABLE Producto (
     envase VARCHAR(50) NOT NULL,
     capacidad BIGINT NOT NULL CHECK (capacidad > 0),
     descripcion VARCHAR(50) NOT NULL,
-    categoria_id BIGINT,
-    FOREIGN KEY (categoria_id) REFERENCES Categoria(id) ON DELETE SET NULL
+    categoria_id BIGINT NOT NULL,
+    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
 );
