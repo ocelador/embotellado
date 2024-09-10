@@ -49,7 +49,7 @@
             <th>Marca</th>
             <th>Sabor</th>
             <th>Envase</th>
-            <th>Capacidad</th>
+            <th>Capacidad(ml)</th>
             <th>Descripción</th>
             <th>Categoría</th>
             <th>Acciones</th>
@@ -207,11 +207,17 @@ table {
 
 th, td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 4px; 
+  word-wrap: break-word; 
 }
 
 th {
   background-color: #f2f2f2;
   text-align: left;
+}
+
+td {
+  max-width: 120px; 
+  white-space: normal; 
 }
 </style>

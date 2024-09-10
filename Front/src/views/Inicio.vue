@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
+    <img src="@/assets/inicio.jpg" alt="Imagen de bienvenida" class="welcome-image" />
   </div>
 </template>
 
@@ -23,5 +24,11 @@ const message = ref('Bienvenido a la factoria de embotellados');
 h1 {
   font-size: 2em;
   margin: 0;
+}
+
+.welcome-image {
+  margin-top: 20px;
+  max-width: 100%;
+  height: auto;
 }
 </style>
