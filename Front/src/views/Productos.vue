@@ -31,8 +31,8 @@
       </div>
       <div>
         <label for="categoria">Categoría:</label>
-        <select v-model="productoForm.categoria_id" required>
-          <option v-for="categoria in categorias" :key="categoria.id" :value="categoria.id">
+        <select v-model="productoForm.categoria" required>
+          <option v-for="categoria in categorias" :key="categoria.id" :value="categoria">
             {{ categoria.nombre }}
           </option>
         </select>
@@ -50,7 +50,7 @@
         <strong>Envase:</strong> {{ producto.envase }}<br>
         <strong>Capacidad:</strong> {{ producto.capacidad }}<br>
         <strong>Descripción:</strong> {{ producto.descripcion }}<br>
-        <strong>Categoría:</strong> {{ getCategoriaNombre(producto.categoria_id) }}<br>
+        <strong>Categoría:</strong> {{ getCategoriaNombre(producto.categoria) }}<br>
         <button @click="editProducto(producto)">Editar</button>
         <button @click="deleteProducto(producto.id)">Eliminar</button>
       </li>
@@ -75,7 +75,7 @@ export default {
         envase: '',
         capacidad: 0,
         descripcion: '',
-        categoria_id: null
+        categoria: null // Cambiado a objeto completo
       },
       isEditing: false
     };
@@ -133,7 +133,7 @@ export default {
     editProducto(producto) {
       this.productoForm = { 
         ...producto,
-        categoria_id: producto.categoria_id
+        categoria: producto.categoria // Asegúrate de que el objeto producto tenga el campo categoria
       };
       this.isEditing = true;
     },
@@ -146,13 +146,11 @@ export default {
         envase: '',
         capacidad: 0,
         descripcion: '',
-        categoria_id: null
+        categoria: null // Cambiado a objeto completo
       };
       this.isEditing = false;
     },
-    getCategoriaNombre(categoriaId) {
-      if (!categoriaId) return 'Sin categoría';
-      const categoria = this.categorias.find(c => c.id === categoriaId);
+    getCategoriaNombre(categoria) {
       return categoria ? categoria.nombre : 'Sin categoría';
     }
   }

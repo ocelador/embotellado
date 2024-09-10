@@ -8,7 +8,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 @Entity
@@ -44,7 +45,7 @@ public class Categoria {
     private Boolean isNatural;
 
     @OneToMany(mappedBy = "categoria")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Producto> productos;
 
     // Getters y Setters

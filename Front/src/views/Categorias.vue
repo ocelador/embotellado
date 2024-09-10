@@ -30,7 +30,7 @@
     <br><h2>Lista de Categorias</h2>
     <ul>
       <li v-for="categoria in categorias" :key="categoria.id">
-        {{ categoria.nombre }} - {{ categoria.descripcion }} - {{ categoria.is0Azucar ? 'Sin Azúcar' : 'Con Azúcar' }} - {{ categoria.isNatural ? 'Natural' : 'Conservantes' }} - {{ categoria.isAlcohólica ? 'Alcohólica' : 'No Alcohólica' }} - {{ categoria.is00 ? '0.0%' : '' }}
+        {{ categoria.nombre }} - {{ categoria.descripcion }} - {{ categoria.is0Azucar ? 'Sin Azúcar' : 'Con Azúcar' }} - {{ categoria.isNatural ? 'Natural' : 'Conservantes' }} - {{ categoria.isAlcohólica ? 'Alcohólica' : 'No Alcohólica' }} - {{ categoria.is00 ? '0.0%' : 'Normal' }}
         <button @click="editCategoria(categoria)">Editar</button>
         <button @click="deleteCategoria(categoria.id)">Eliminar</button>
       </li>

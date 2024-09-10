@@ -9,7 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Min;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Producto {
@@ -48,7 +48,7 @@ public class Producto {
     private Long capacidad;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     private Categoria categoria;
 
     // Getters y Setters
