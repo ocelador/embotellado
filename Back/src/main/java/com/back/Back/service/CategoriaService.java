@@ -23,10 +23,6 @@ public class CategoriaService {
         return categoria.orElse(null);
     }
 
-    public String getNombreById(Long id) {
-        return categoriaRepository.findNombreById(id);
-    }
-
     public Categoria createCategoria(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
@@ -50,7 +46,12 @@ public class CategoriaService {
     public boolean deleteCategoria(Long id) {
         Optional<Categoria> optionalCategoria = categoriaRepository.findById(id);
         if (optionalCategoria.isPresent()) {
-            categoriaRepository.delete(optionalCategoria.get());
+            Categoria categoria = optionalCategoria.get();
+            if (categoria.getProductos() != null && !categoria.getProductos().isEmpty()) {
+                // No se puede borrar la categoría porque tiene productos asociados
+                return false;
+            }
+            categoriaRepository.delete(categoria);
             return true;
         } else {
             return false;

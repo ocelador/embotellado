@@ -9,7 +9,7 @@ import { RouterLink, RouterView } from 'vue-router';
       <div class="container-fluid d-flex justify-content-center">
         <RouterLink class="nav-link" active-class="active" to="/">Inicio </RouterLink>
         <RouterLink class="nav-link" active-class="active" to="/productos">Productos</RouterLink>
-        <RouterLink class="nav-link" active-class="active" to="/categorias">Categorias</RouterLink>
+        <RouterLink class="nav-link" active-class="active" to="/categorias">categoría</RouterLink>
       </div>
     </nav>
     

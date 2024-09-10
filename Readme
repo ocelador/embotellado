@@ -6,6 +6,16 @@ DB:
 - borrar una categoria no borra un producto y viceversa
 Back: 
 - base de datos de H2
+- no se puede borrar categoria con producto
+- usar jsonview
 
 Front: 
 - maestro detalle
+- en capacidad añadir la medida
+- poner las tildes
+- eliminar la palabra lista
+- eliminar la bienvenida
+- que editar este a la izquierda de la pagina y la lista a la derecha y la lista tenga scrol pero editar no
+- eliminar las redundancias de productos y categorias
+- el listado sea en formato tablas
+- usar text area

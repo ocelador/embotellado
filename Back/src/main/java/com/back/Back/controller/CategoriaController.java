@@ -37,16 +37,6 @@ public class CategoriaController {
         }
     }
 
-    @GetMapping("/nombre/{id}")
-    public ResponseEntity<String> getNombreById(@PathVariable Long id) {
-        String nombre = categoriaService.getNombreById(id);
-        if (nombre != null) {
-            return ResponseEntity.ok(nombre);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
     @PostMapping
     public Categoria createCategoria(@RequestBody Categoria categoria) {
         return categoriaService.createCategoria(categoria);
@@ -68,7 +58,7 @@ public class CategoriaController {
         if (deleted) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(409).build(); // 409 Conflict
         }
     }
 }

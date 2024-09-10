@@ -1,60 +1,77 @@
 <template>
-  <div>
-    <h1>Productos</h1>
-    <p>Bienvenido a la página de Productos.</p>
+  <div class="container">
+    <div class="form-container">
+      <h2>{{ isEditing ? 'Editar Bebida' : 'Agregar Bebida' }}</h2>
+      <form @submit.prevent="isEditing ? updateProducto() : createProducto()">
+        <div>
+          <label for="nombre">Nombre:</label>
+          <input type="text" v-model="productoForm.nombre" required />
+        </div>
+        <div>
+          <label for="marca">Marca:</label>
+          <input type="text" v-model="productoForm.marca" required />
+        </div>
+        <div>
+          <label for="sabor">Sabor:</label>
+          <input type="text" v-model="productoForm.sabor" required />
+        </div>
+        <div>
+          <label for="envase">Envase:</label>
+          <input type="text" v-model="productoForm.envase" required />
+        </div>
+        <div>
+          <label for="capacidad">Capacidad (ml):</label>
+          <input type="number" v-model="productoForm.capacidad" min="0" required />
+        </div>
+        <div>
+          <label for="descripcion">Descripción:</label><br>
+          <textarea v-model="productoForm.descripcion" rows="4" cols="50"></textarea>
+        </div>
+        <div>
+          <label for="categoria">Categoría:</label>
+          <select v-model="productoForm.categoria">
+            <option v-for="categoria in categorias" :key="categoria.id" :value="categoria">
+              {{ categoria.nombre }}
+            </option>
+          </select>
+        </div>
+        <button type="submit">{{ isEditing ? 'Actualizar' : 'Agregar' }} Bebida</button>
+        <button type="button" @click="resetForm">Cancelar</button>
+      </form>
+    </div>
 
-    <h2>{{ isEditing ? 'Editar Producto' : 'Añadir Producto' }}</h2>
-    <form @submit.prevent="isEditing ? updateProducto() : createProducto()">
-      <div>
-        <label for="nombre">Nombre:</label>
-        <input type="text" v-model="productoForm.nombre" required />
-      </div>
-      <div>
-        <label for="marca">Marca:</label>
-        <input type="text" v-model="productoForm.marca" required />
-      </div>
-      <div>
-        <label for="sabor">Sabor:</label>
-        <input type="text" v-model="productoForm.sabor" required />
-      </div>
-      <div>
-        <label for="envase">Envase:</label>
-        <input type="text" v-model="productoForm.envase" required />
-      </div>
-      <div>
-        <label for="capacidad">Capacidad:</label>
-        <input type="number" v-model="productoForm.capacidad" required />
-      </div>
-      <div>
-        <label for="descripcion">Descripción:</label>
-        <input type="text" v-model="productoForm.descripcion" required />
-      </div>
-      <div>
-        <label for="categoria">Categoría:</label>
-        <select v-model="productoForm.categoria" required>
-          <option v-for="categoria in categorias" :key="categoria.id" :value="categoria">
-            {{ categoria.nombre }}
-          </option>
-        </select>
-      </div>
-      <button type="submit">{{ isEditing ? 'Actualizar' : 'Añadir' }} Producto</button>
-      <button type="button" @click="resetForm">Cancelar</button>
-    </form>
-
-    <br><h2>Lista de Productos</h2>
-    <ul>
-      <li v-for="producto in productos" :key="producto.id">
-        <strong>Nombre:</strong> {{ producto.nombre }}<br>
-        <strong>Marca:</strong> {{ producto.marca }}<br>
-        <strong>Sabor:</strong> {{ producto.sabor }}<br>
-        <strong>Envase:</strong> {{ producto.envase }}<br>
-        <strong>Capacidad:</strong> {{ producto.capacidad }}<br>
-        <strong>Descripción:</strong> {{ producto.descripcion }}<br>
-        <strong>Categoría:</strong> {{ getCategoriaNombre(producto.categoria) }}<br>
-        <button @click="editProducto(producto)">Editar</button>
-        <button @click="deleteProducto(producto.id)">Eliminar</button>
-      </li>
-    </ul>
+    <div class="table-container">
+      <h2>Nuestras bebidas</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Sabor</th>
+            <th>Envase</th>
+            <th>Capacidad</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="producto in productos" :key="producto.id">
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.marca }}</td>
+            <td>{{ producto.sabor }}</td>
+            <td>{{ producto.envase }}</td>
+            <td>{{ producto.capacidad }}</td>
+            <td>{{ producto.descripcion }}</td>
+            <td>{{ producto.categoria.nombre}}</td>
+            <td>
+              <button @click="editProducto(producto)">Editar</button>
+              <button @click="deleteProducto(producto.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -161,24 +178,40 @@ export default {
         categoria: null
       };
       this.isEditing = false;
-    },
-    getCategoriaNombre(categoria) {
-      return categoria ? categoria.nombre : 'Sin categoría';
     }
   }
 };
 </script>
 
 <style scoped>
-form {
-  margin-bottom: 20px;
+.container {
+  display: flex;
+  flex-direction: row;
 }
 
-form div {
-  margin-bottom: 10px;
+.form-container {
+  flex: 1;
+  margin-right: 20px;
 }
 
-button {
-  margin-right: 10px;
+.table-container {
+  flex: 2;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+  text-align: left;
 }
 </style>

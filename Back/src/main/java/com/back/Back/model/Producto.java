@@ -1,7 +1,5 @@
 package com.back.Back.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,7 +11,6 @@ import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Min;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

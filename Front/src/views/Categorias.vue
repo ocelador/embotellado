@@ -1,40 +1,73 @@
 <template>
-  <div>
-    <h1>Categorias</h1>
-    <p>Bienvenido a la página de Categorias.</p>
-    
-    <h2>{{ isEditing ? 'Editar Categoria' : 'Crear Categoria' }}</h2>
-    <form @submit.prevent="isEditing ? updateCategoria() : createCategoria()">
-      <input v-model="categoriaForm.nombre" placeholder="Nombre" required />
-      <input v-model="categoriaForm.descripcion" placeholder="Descripción" required />
-      <label>
-        <input type="checkbox" v-model="categoriaForm.is0Azucar" />
-        Sin Azúcar
-      </label>
-      <label>
-        <input type="checkbox" v-model="categoriaForm.isNatural" />
-        Natural
-      </label>
-      <label>
-        <input type="checkbox" v-model="categoriaForm.isAlcohólica" />
-        Alcohólica
-      </label>
-      <label>
-        <input type="checkbox" v-model="categoriaForm.is00" />
-        0.0%
-      </label>
-      <button type="submit">{{ isEditing ? 'Actualizar' : 'Crear' }}</button>
-      <button type="button" @click="resetForm">Cancelar</button>
-    </form>
-    
-    <br><h2>Lista de Categorias</h2>
-    <ul>
-      <li v-for="categoria in categorias" :key="categoria.id">
-        {{ categoria.nombre }} - {{ categoria.descripcion }} - {{ categoria.is0Azucar ? 'Sin Azúcar' : 'Con Azúcar' }} - {{ categoria.isNatural ? 'Natural' : 'Conservantes' }} - {{ categoria.isAlcohólica ? 'Alcohólica' : 'No Alcohólica' }} - {{ categoria.is00 ? '0.0%' : 'Normal' }}
-        <button @click="editCategoria(categoria)">Editar</button>
-        <button @click="deleteCategoria(categoria.id)">Eliminar</button>
-      </li>
-    </ul>
+  <div class="container">
+    <div class="form-container">
+      <h2>{{ isEditing ? 'Editar categoría' : 'Crear categoría' }}</h2>
+      <form @submit.prevent="isEditing ? updateCategoria() : createCategoria()">
+        <div>
+          <input v-model="categoriaForm.nombre" placeholder="Nombre" required /><br>
+        </div>
+        <div>
+          <textarea v-model="categoriaForm.descripcion" placeholder="Descripción" rows="4" cols="50"></textarea><br>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" v-model="categoriaForm.is0Azucar" />
+            Sin Azúcar
+          </label><br>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" v-model="categoriaForm.isNatural" />
+            Natural
+          </label><br>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" v-model="categoriaForm.isAlcohólica" />
+            Alcohólica
+          </label><br>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" v-model="categoriaForm.is00" />
+            0.0%
+          </label><br>
+        </div>
+        <button type="submit">{{ isEditing ? 'Actualizar' : 'Crear' }}</button>
+        <button type="button" @click="resetForm">Cancelar</button>
+      </form>
+    </div>
+
+    <div class="table-container">
+      <h2>Tipos de bebidas</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Sin Azúcar</th>
+            <th>Natural</th>
+            <th>Alcohólica</th>
+            <th>0.0%</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="categoria in categorias" :key="categoria.id">
+            <td>{{ categoria.nombre }}</td>
+            <td>{{ categoria.descripcion }}</td>
+            <td>{{ categoria.is0Azucar ? 'Sí' : 'No' }}</td>
+            <td>{{ categoria.isNatural ? 'Sí' : 'No' }}</td>
+            <td>{{ categoria.isAlcohólica ? 'Sí' : 'No' }}</td>
+            <td>{{ categoria.is00 ? 'Sí' : 'No' }}</td>
+            <td>
+              <button @click="editCategoria(categoria)">Editar</button>
+              <button @click="deleteCategoria(categoria.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -121,3 +154,36 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.table-container {
+  flex: 2;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+</style>
