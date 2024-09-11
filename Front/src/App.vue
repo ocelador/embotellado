@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from 'vue-router';
 <template>
   <main>
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -26,11 +26,15 @@ import { RouterLink, RouterView } from 'vue-router';
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;
 }
 
 main {
@@ -43,20 +47,21 @@ a {
 
 .navbar {
   text-align: center;
+  background-color: #343a40 !important;
 }
 
 .nav-link {
-  color: #333;
+  color: #ffffff;
   font-weight: 500;
   transition: color 0.3s ease-in-out;
 }
 
 .nav-link:hover {
-  color: #0056b3;
+  color: #ffc107;
 }
 
 .nav-link.active {
-  color: #007bff;
+  color: #ffc107;
   font-weight: bold;
 }
 

@@ -8,34 +8,31 @@
 <script setup>
 import { ref } from 'vue';
 
-const message = ref('Bienvenido a la factoria de embotellados');
+const message = ref('Bienvenido a la factoría de embotellados');
 </script>
 
 <style scoped>
-.home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  text-align: center;
-  padding: 20px; 
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 h1 {
   font-size: 2em;
-  margin: 0;
+  color: #343a40;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .welcome-image {
-  margin-top: 20px;
+  display: block;
+  margin: 20px auto;
   max-width: 100%;
   height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 1.5em; 
+    font-size: 1.5em;
   }
 
   .welcome-image {

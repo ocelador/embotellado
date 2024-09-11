@@ -1,42 +1,38 @@
 <template>
   <div class="container">
     <div class="form-container">
-      <h2>{{ isEditing ? 'Editar Bebida' : 'Agregar Bebida' }}</h2>
+      <h2>{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h2>
       <form @submit.prevent="isEditing ? updateProducto() : createProducto()">
-        <div>
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" v-model="productoForm.nombre" required />
+        <div class="form-group">
+          <input type="text" id="nombre" v-model="productoForm.nombre" placeholder="Nombre" required />
         </div>
-        <div>
-          <label for="marca">Marca:</label>
-          <input type="text" id="marca" v-model="productoForm.marca" required />
+        <div class="form-group">
+          <input type="text" id="marca" v-model="productoForm.marca" placeholder="Marca" required />
         </div>
-        <div>
-          <label for="sabor">Sabor:</label>
-          <input type="text" id="sabor" v-model="productoForm.sabor" required />
+        <div class="form-group">
+          <input type="text" id="sabor" v-model="productoForm.sabor" placeholder="Sabor" required />
         </div>
-        <div>
-          <label for="envase">Envase:</label>
-          <input type="text" id="envase" v-model="productoForm.envase" required />
+        <div class="form-group">
+          <input type="text" id="envase" v-model="productoForm.envase" placeholder="Envase" required />
         </div>
-        <div>
-          <label for="capacidad">Capacidad (ml):</label>
-          <input type="number" id="capacidad" v-model="productoForm.capacidad" min="0" required />
+        <div class="form-group input-group">
+          <input type="number" id="capacidad" v-model="productoForm.capacidad" placeholder="Capacidad" min="0" required />
+          <span class="input-group-text">ml</span>
         </div>
-        <div>
-          <label for="descripcion">Descripción:</label><br>
-          <textarea id="descripcion" v-model="productoForm.descripcion" rows="4" cols="40"></textarea>
+        <div class="form-group">
+          <textarea id="descripcion" v-model="productoForm.descripcion" placeholder="Descripción" rows="4" cols="33"></textarea>
         </div>
-        <div>
-          <label for="categoria">Categoría:</label>
+        <div class="form-group">
           <select id="categoria" v-model="productoForm.categoria">
             <option v-for="categoria in categorias" :key="categoria.id" :value="categoria">
               {{ categoria.nombre }}
             </option>
           </select>
         </div>
-        <button type="submit">{{ isEditing ? 'Actualizar' : 'Agregar' }} Bebida</button>
-        <button type="button" @click="resetForm">Cancelar</button>
+        <div class="form-actions">
+          <button type="submit" class="button-standard">Guardar</button>
+          <button type="button" class="button-standard" @click="resetForm">Cancelar</button>
+        </div>
       </form>
     </div>
 
@@ -65,8 +61,8 @@
             <td>{{ producto.descripcion }}</td>
             <td>{{ producto.categoria.nombre}}</td>
             <td>
-              <button @click="editProducto(producto)">Editar</button>
-              <button @click="deleteProducto(producto.id)">Eliminar</button>
+              <button class="button-standard" @click="editProducto(producto)">Editar</button>
+              <button class="button-standard" @click="deleteProducto(producto.id)">Eliminar</button>
             </td>
           </tr>
         </tbody>
@@ -184,23 +180,41 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 .container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-container {
   flex: 1;
   margin-right: 20px;
-  min-width: 300px; 
+  min-width: 300px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
+  overflow-y: auto;
 }
 
 .table-container {
   flex: 2;
   max-height: 400px;
   overflow-y: auto;
-  min-width: 300px; 
+  min-width: 300px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
+  overflow-y: auto; /* Agrega scroll vertical */
 }
 
 table {
@@ -210,38 +224,102 @@ table {
 
 th, td {
   border: 1px solid #ddd;
-  padding: 4px; 
-  word-wrap: break-word; 
+  padding: 8px;
+  word-wrap: break-word;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #343a40;
+  color: #ffffff;
   text-align: left;
 }
 
 td {
-  max-width: 120px; 
-  white-space: normal; 
+  max-width: 120px;
+  white-space: normal;
+}
+
+button {
+  background-color: #343a40;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #ffc107;
+}
+
+.button-standard {
+  width: 100px; 
+  height: 40px; 
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group input {
+  flex: 1;
+}
+
+.input-group-text {
+  margin-left: 8px;
+  background-color: #ffffff;
+  color: #000000; 
+  padding: 8px;
+  border: none; 
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; 
+    flex-direction: column;
   }
 
   .form-container, .table-container {
     margin-right: 0;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
   }
 }
 
 @media (max-width: 480px) {
   th, td {
-    padding: 2px; 
+    padding: 4px;
   }
 
   td {
-    max-width: 100px; 
+    max-width: 100px;
   }
 }
 </style>
