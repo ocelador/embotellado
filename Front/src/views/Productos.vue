@@ -16,7 +16,7 @@
           <input type="text" id="envase" v-model="productoForm.envase" placeholder="Envase" maxlength="35" required />
         </div>
         <div class="form-group input-group">
-          <input type="number" id="capacidad" v-model="productoForm.capacidad" placeholder="Capacidad" min="0" required />
+          <input type="number" id="capacidad" v-model="productoForm.capacidad" placeholder="Capacidad" min="1" required />
           <span class="input-group-text">ml</span>
         </div>
         <div class="form-group">
