@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="form-container">
-      <h2>{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h2>
-      <form @submit.prevent="isEditing ? updateProducto() : createProducto()">
+      <h2>{{ isEditing ? 'Editar' : 'Agregar' }}</h2>
+      <form @submit.prevent="isEditing ? updateProducto() : createProducto()" class="form-content">
         <div class="form-group">
           <input type="text" id="nombre" v-model="productoForm.nombre" placeholder="Nombre" maxlength="35" required />
         </div>
@@ -15,7 +15,7 @@
         <div class="form-group">
           <input type="text" id="envase" v-model="productoForm.envase" placeholder="Envase" maxlength="35" required />
         </div>
-        <div class="form-group input-group">
+        <div class="form-group input-group small-input-group">
           <input type="number" id="capacidad" v-model="productoForm.capacidad" placeholder="Capacidad" min="1" required />
           <span class="input-group-text">ml</span>
         </div>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="table-container">
-      <h2>Nuestras bebidas</h2>
+      <h2>Nuestros Productos</h2>
       <table>
         <thead>
           <tr>
@@ -48,7 +48,7 @@
             <th>Capacidad(ml)</th>
             <th>Descripción</th>
             <th>Categoría</th>
-            <th>Acciones</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -207,10 +207,19 @@ html, body, #app {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
   overflow-y: auto; /* Agrega scroll vertical */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .table-container {
-  flex: 2;
+  flex: 3; 
   min-height: 400px;
   max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
   overflow-y: auto; /* Agrega scroll vertical */
@@ -268,11 +277,15 @@ button:hover {
 
 .input-group {
   display: flex;
+  justify-content: flex-end; 
   align-items: center;
 }
 
 .input-group input {
   flex: 1;
+  text-align: right; 
+  padding-right: 20px; 
+  width: 80px; 
 }
 
 .input-group-text {
@@ -286,7 +299,7 @@ button:hover {
 .form-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: auto;
 }
 
 .form-group {
@@ -307,6 +320,20 @@ button:hover {
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+.small-input-group {
+  max-width: 150px; /* Ajusta el ancho máximo del contenedor */
+}
+
+.small-input-group input {
+  width: 60px; /* Ajusta el ancho del input */
+  text-align: right;
+}
+
+.small-input-group .input-group-text {
+  padding: 8px;
+  margin-left: 8px;
 }
 
 @media (max-width: 768px) {

@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="form-container">
-      <h2>{{ isEditing ? 'Editar categoría' : 'Agregar categoría' }}</h2>
-      <form @submit.prevent="isEditing ? updateCategoria() : createCategoria()">
+      <h2>{{ isEditing ? 'Editar' : 'Agregar' }}</h2>
+      <form @submit.prevent="isEditing ? updateCategoria() : createCategoria()" class="form-content">
         <div class="form-group">
           <input id="nombre" v-model="categoriaForm.nombre" placeholder="Nombre" maxlength="35" required />
         </div>
@@ -12,7 +12,7 @@
         <div class="form-group checkbox-group">
           <label>
             <input type="checkbox" v-model="categoriaForm.is0Azucar" />
-            Sin_Azúcar
+            Sin Azúcar
           </label>
         </div>
         <div class="form-group checkbox-group">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="table-container">
-      <h2>Tipos de bebidas</h2>
+      <h2>Tipos de Categoría</h2>
       <table>
         <thead>
           <tr>
@@ -51,7 +51,7 @@
             <th>Natural</th>
             <th>Alcohólica</th>
             <th>0.0%</th>
-            <th>Acciones</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -185,10 +185,19 @@ html, body, #app {
   box-sizing: border-box;
   max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
   overflow-y: auto; /* Agrega scroll vertical */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .table-container {
-  flex: 2;
+  flex: 3;
   min-height: 400px;
   min-width: 300px;
   background-color: #ffffff;
@@ -272,6 +281,7 @@ button:hover {
 .checkbox-group label {
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .checkbox-group input {
@@ -281,6 +291,7 @@ button:hover {
 .form-actions {
   display: flex;
   justify-content: space-between;
+  margin-top: auto;
 }
 
 @media (max-width: 768px) {
