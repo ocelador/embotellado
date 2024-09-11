@@ -166,10 +166,10 @@ html, body, #app {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: #f8f9fa;
+  background-color: #e0e0e0;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(176, 176, 176, 0.5);
   height: 100%;
   box-sizing: border-box;
 }
@@ -181,7 +181,7 @@ html, body, #app {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(176, 176, 176, 0.5);
   box-sizing: border-box;
   max-height: calc(80vh - 60px); 
   overflow-y: auto; 
@@ -203,7 +203,7 @@ html, body, #app {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(176, 176, 176, 0.5);
   box-sizing: border-box;
   max-height: calc(80vh - 60px); 
   overflow-y: auto; 
@@ -215,7 +215,7 @@ table {
 }
 
 th, td {
-  border: 1px solid #ddd;
+  border: 1px solid #b0b0b0;
   padding: 8px;
   word-wrap: break-word;
   text-align: center; 
@@ -223,7 +223,7 @@ th, td {
 }
 
 th {
-  background-color: #343a40;
+  background-color: #34495e !important;
   color: #ffffff;
   text-align: left;
 }
@@ -234,7 +234,7 @@ td {
 }
 
 button {
-  background-color: #343a40;
+  background-color: #007bff;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -245,7 +245,11 @@ button {
 }
 
 button:hover {
-  background-color: #ffc107;
+  background-color: #0056b3;
+}
+
+button:active {
+  background-color: #004085;
 }
 
 .button-standard {
@@ -272,7 +276,7 @@ button:hover {
 .form-group select {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #b0b0b0;
   border-radius: 4px;
   box-sizing: border-box;
 }

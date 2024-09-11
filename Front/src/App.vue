@@ -34,7 +34,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  background-color: #f8f9fa;
+  background-color: #f0f0f0;
 }
 
 main {
@@ -47,7 +47,7 @@ a {
 
 .navbar {
   text-align: center;
-  background-color: #343a40 !important;
+  background-color: #34495e !important;
 }
 
 .nav-link {
@@ -57,11 +57,11 @@ a {
 }
 
 .nav-link:hover {
-  color: #ffc107;
+  color: #f39c12;
 }
 
 .nav-link.active {
-  color: #ffc107;
+  color: #f39c12;
   font-weight: bold;
 }
 

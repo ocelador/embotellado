@@ -191,10 +191,12 @@ html, body, #app {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: #f8f9fa;
+  background-color: #e0e0e0;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(176, 176, 176, 0.5);
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .form-container {
@@ -204,12 +206,13 @@ html, body, #app {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
-  overflow-y: auto; /* Agrega scroll vertical */
+  box-shadow: 0 4px 8px rgba(176, 176, 176, 0.5);
+  box-sizing: border-box;
+  max-height: calc(80vh - 60px); 
+  overflow-y: auto; 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; 
 }
 
 .form-content {
@@ -219,16 +222,16 @@ html, body, #app {
 }
 
 .table-container {
-  flex: 3; 
+  flex: 3;
   min-height: 400px;
-  max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
-  overflow-y: auto; /* Agrega scroll vertical */
   min-width: 300px;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(176, 176, 176, 0.5);
   box-sizing: border-box;
+  max-height: calc(80vh - 60px); 
+  overflow-y: auto; 
 }
 
 table {
@@ -237,15 +240,15 @@ table {
 }
 
 th, td {
-  border: 1px solid #ddd;
+  border: 1px solid #b0b0b0;
   padding: 8px;
   word-wrap: break-word;
-  text-align: center;
-  vertical-align: middle; 
+  text-align: center; 
+  vertical-align: middle;
 }
 
 th {
-  background-color: #343a40;
+  background-color: #34495e !important;
   color: #ffffff;
   text-align: left;
 }
@@ -256,7 +259,7 @@ td {
 }
 
 button {
-  background-color: #343a40;
+  background-color: #007bff;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -267,39 +270,20 @@ button {
 }
 
 button:hover {
-  background-color: #ffc107;
+  background-color: #0056b3;
+}
+
+button:active {
+  background-color: #004085;
 }
 
 .button-standard {
-  width: 100px; 
+  width: 100px;
   height: 40px; 
 }
 
-.input-group {
-  display: flex;
-  justify-content: flex-end; 
-  align-items: center;
-}
-
-.input-group input {
-  flex: 1;
-  text-align: right; 
-  padding-right: 20px; 
-  width: 80px; 
-}
-
-.input-group-text {
-  margin-left: 8px;
-  background-color: #ffffff;
-  color: #000000; 
-  padding: 8px;
-  border: none; 
-}
-
-.form-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: auto;
+.symbol {
+  font-size: 1.5em; 
 }
 
 .form-group {
@@ -317,23 +301,30 @@ button:hover {
 .form-group select {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #b0b0b0;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-.small-input-group {
-  max-width: 150px; 
+.checkbox-group {
+  display: flex;
+  align-items: center;
 }
 
-.small-input-group input {
-  width: 60px; 
-  text-align: right;
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 }
 
-.small-input-group .input-group-text {
-  padding: 8px;
-  margin-left: 8px;
+.checkbox-group input {
+  margin-right: 10px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
 }
 
 @media (max-width: 768px) {
@@ -351,8 +342,8 @@ button:hover {
   }
 
   .button-edit, .button-delete {
-    width: 80px; 
-    height: 30px; 
+    width: 80px;
+    height: 30px;
     font-size: 12px; 
   }
 }
@@ -367,7 +358,7 @@ button:hover {
   }
 
   .container {
-    overflow-x: auto; 
+    overflow-x: auto;
   }
 
   .button-edit, .button-delete {
