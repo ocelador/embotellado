@@ -63,8 +63,8 @@
             <td>{{ categoria.isAlcohólica ? 'V' : 'X' }}</td>
             <td>{{ categoria.is00 ? 'V' : 'X' }}</td>
             <td>
-              <button class="btn button-standard" @click="editCategoria(categoria)">Editar</button>
-              <button class="btn button-standard" @click="deleteCategoria(categoria.id)">Eliminar</button>
+              <button class="btn button-standard button-edit" @click="editCategoria(categoria)">Editar</button>
+              <button class="btn button-standard button-delete" @click="deleteCategoria(categoria.id)">Eliminar</button>
             </td>
           </tr>
         </tbody>
@@ -183,8 +183,8 @@ html, body, #app {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
-  overflow-y: auto; /* Agrega scroll vertical */
+  max-height: calc(80vh - 60px); 
+  overflow-y: auto; 
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
@@ -205,8 +205,8 @@ html, body, #app {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
-  overflow-y: auto; /* Agrega scroll vertical */
+  max-height: calc(80vh - 60px); 
+  overflow-y: auto; 
 }
 
 table {
@@ -303,6 +303,16 @@ button:hover {
     margin-right: 0;
     margin-bottom: 20px;
   }
+
+  .container {
+    overflow-x: auto; 
+  }
+
+  .button-edit, .button-delete {
+    width: 80px;
+    height: 30px;
+    font-size: 12px; 
+  }
 }
 
 @media (max-width: 480px) {
@@ -312,6 +322,16 @@ button:hover {
 
   td {
     max-width: 100px;
+  }
+
+  .container {
+    overflow-x: auto;
+  }
+
+  .button-edit, .button-delete {
+    width: 60px; 
+    height: 25px; 
+    font-size: 10px; 
   }
 }
 </style>

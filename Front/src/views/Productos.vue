@@ -61,8 +61,8 @@
             <td>{{ producto.descripcion }}</td>
             <td>{{ producto.categoria.nombre }}</td>
             <td>
-              <button class="button-standard" @click="editProducto(producto)">Editar</button>
-              <button class="button-standard" @click="deleteProducto(producto.id)">Eliminar</button>
+              <button class="button-standard button-edit" @click="editProducto(producto)">Editar</button>
+              <button class="button-standard button-delete" @click="deleteProducto(producto.id)">Eliminar</button>
             </td>
           </tr>
         </tbody>
@@ -323,11 +323,11 @@ button:hover {
 }
 
 .small-input-group {
-  max-width: 150px; /* Ajusta el ancho máximo del contenedor */
+  max-width: 150px; 
 }
 
 .small-input-group input {
-  width: 60px; /* Ajusta el ancho del input */
+  width: 60px; 
   text-align: right;
 }
 
@@ -345,6 +345,16 @@ button:hover {
     margin-right: 0;
     margin-bottom: 20px;
   }
+
+  .container {
+    overflow-x: auto; 
+  }
+
+  .button-edit, .button-delete {
+    width: 80px; 
+    height: 30px; 
+    font-size: 12px; 
+  }
 }
 
 @media (max-width: 480px) {
@@ -354,6 +364,16 @@ button:hover {
 
   td {
     max-width: 100px;
+  }
+
+  .container {
+    overflow-x: auto; 
+  }
+
+  .button-edit, .button-delete {
+    width: 60px; 
+    height: 25px; 
+    font-size: 10px; 
   }
 }
 </style>
