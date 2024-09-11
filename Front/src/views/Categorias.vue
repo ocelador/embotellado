@@ -58,10 +58,10 @@
           <tr v-for="categoria in categorias" :key="categoria.id">
             <td>{{ categoria.nombre }}</td>
             <td>{{ categoria.descripcion }}</td>
-            <td>{{ categoria.is0Azucar ? 'V' : 'X' }}</td>
-            <td>{{ categoria.isNatural ? 'V' : 'X' }}</td>
-            <td>{{ categoria.isAlcohólica ? 'V' : 'X' }}</td>
-            <td>{{ categoria.is00 ? 'V' : 'X' }}</td>
+            <td><span class="symbol">{{ categoria.is0Azucar ? '✔' : '✗' }}</span></td>
+            <td><span class="symbol">{{ categoria.isNatural ? '✔' : '✗' }}</span></td>
+            <td><span class="symbol">{{ categoria.isAlcohólica ? '✔' : '✗' }}</span></td>
+            <td><span class="symbol">{{ categoria.is00 ? '✔' : '✗' }}</span></td>
             <td>
               <button class="btn button-standard button-edit" @click="editCategoria(categoria)">Editar</button>
               <button class="btn button-standard button-delete" @click="deleteCategoria(categoria.id)">Eliminar</button>
@@ -251,6 +251,10 @@ button:hover {
 .button-standard {
   width: 120px;
   height: 40px; 
+}
+
+.symbol {
+  font-size: 1.5em; 
 }
 
 .form-group {
