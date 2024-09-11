@@ -183,7 +183,7 @@ html, body, #app {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  max-height: calc(100vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
+  max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
   overflow-y: auto;
 }
 
@@ -197,7 +197,7 @@ html, body, #app {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
-  overflow-y: auto;
+  overflow-y: auto; /* Agrega scroll vertical */
 }
 
 table {
@@ -209,6 +209,8 @@ th, td {
   border: 1px solid #ddd;
   padding: 8px;
   word-wrap: break-word;
+  text-align: center; /* Centra horizontalmente */
+  vertical-align: middle; /* Centra verticalmente */
 }
 
 th {

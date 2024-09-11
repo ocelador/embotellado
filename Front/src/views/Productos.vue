@@ -57,9 +57,9 @@
             <td>{{ producto.marca }}</td>
             <td>{{ producto.sabor }}</td>
             <td>{{ producto.envase }}</td>
-            <td>{{ producto.capacidad }}</td>
+            <td>{{ producto.capacidad }} ml</td>
             <td>{{ producto.descripcion }}</td>
-            <td>{{ producto.categoria.nombre}}</td>
+            <td>{{ producto.categoria.nombre }}</td>
             <td>
               <button class="button-standard" @click="editProducto(producto)">Editar</button>
               <button class="button-standard" @click="deleteProducto(producto.id)">Eliminar</button>
@@ -182,6 +182,11 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+html, body, #app {
+  height: 100%;
+  margin: 0;
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -200,21 +205,21 @@ export default {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-height: calc(100vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
-  overflow-y: auto;
+  max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
+  overflow-y: auto; /* Agrega scroll vertical */
 }
 
 .table-container {
   flex: 2;
-  max-height: 400px;
-  overflow-y: auto;
+  min-height: 400px;
+  max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
+  overflow-y: auto; /* Agrega scroll vertical */
   min-width: 300px;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
-  overflow-y: auto; /* Agrega scroll vertical */
+  box-sizing: border-box;
 }
 
 table {
@@ -226,6 +231,8 @@ th, td {
   border: 1px solid #ddd;
   padding: 8px;
   word-wrap: break-word;
+  text-align: center;
+  vertical-align: middle; 
 }
 
 th {
