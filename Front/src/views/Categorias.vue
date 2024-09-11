@@ -4,10 +4,10 @@
       <h2>{{ isEditing ? 'Editar categoría' : 'Agregar categoría' }}</h2>
       <form @submit.prevent="isEditing ? updateCategoria() : createCategoria()">
         <div class="form-group">
-          <input id="nombre" v-model="categoriaForm.nombre" placeholder="Nombre" required />
+          <input id="nombre" v-model="categoriaForm.nombre" placeholder="Nombre" maxlength="35" required />
         </div>
         <div class="form-group">
-          <textarea id="descripcion" v-model="categoriaForm.descripcion" placeholder="Descripción" rows="4" cols="50"></textarea>
+          <textarea id="descripcion" v-model="categoriaForm.descripcion" placeholder="Descripción" rows="4" cols="50" maxlength="50"></textarea>
         </div>
         <div class="form-group checkbox-group">
           <label>
@@ -184,7 +184,7 @@ html, body, #app {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   max-height: calc(80vh - 60px); /* Ajusta la altura máxima para que no se extienda más allá de la página */
-  overflow-y: auto;
+  overflow-y: auto; /* Agrega scroll vertical */
 }
 
 .table-container {
@@ -209,8 +209,8 @@ th, td {
   border: 1px solid #ddd;
   padding: 8px;
   word-wrap: break-word;
-  text-align: center; /* Centra horizontalmente */
-  vertical-align: middle; /* Centra verticalmente */
+  text-align: center; 
+  vertical-align: middle;
 }
 
 th {

@@ -19,7 +19,7 @@ public class Categoria {
     private Long id;
 
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 35)
     @Column(nullable = false)
     private String nombre;
 

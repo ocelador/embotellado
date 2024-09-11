@@ -17,22 +17,22 @@ public class Producto {
     private Long id;
 
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 35)
     @Column(nullable = false)
     private String nombre;
 
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 35)
     @Column(nullable = false)
     private String marca;
 
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 35)
     @Column(nullable = false)
     private String sabor;
 
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 35)
     @Column(nullable = false)
     private String envase;
 

@@ -4,23 +4,23 @@
       <h2>{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h2>
       <form @submit.prevent="isEditing ? updateProducto() : createProducto()">
         <div class="form-group">
-          <input type="text" id="nombre" v-model="productoForm.nombre" placeholder="Nombre" required />
+          <input type="text" id="nombre" v-model="productoForm.nombre" placeholder="Nombre" maxlength="35" required />
         </div>
         <div class="form-group">
-          <input type="text" id="marca" v-model="productoForm.marca" placeholder="Marca" required />
+          <input type="text" id="marca" v-model="productoForm.marca" placeholder="Marca" maxlength="35" required />
         </div>
         <div class="form-group">
-          <input type="text" id="sabor" v-model="productoForm.sabor" placeholder="Sabor" required />
+          <input type="text" id="sabor" v-model="productoForm.sabor" placeholder="Sabor" maxlength="35" required />
         </div>
         <div class="form-group">
-          <input type="text" id="envase" v-model="productoForm.envase" placeholder="Envase" required />
+          <input type="text" id="envase" v-model="productoForm.envase" placeholder="Envase" maxlength="35" required />
         </div>
         <div class="form-group input-group">
           <input type="number" id="capacidad" v-model="productoForm.capacidad" placeholder="Capacidad" min="0" required />
           <span class="input-group-text">ml</span>
         </div>
         <div class="form-group">
-          <textarea id="descripcion" v-model="productoForm.descripcion" placeholder="Descripción" rows="4" cols="33"></textarea>
+          <textarea id="descripcion" v-model="productoForm.descripcion" placeholder="Descripción" rows="4" cols="33" maxlength="50"></textarea>
         </div>
         <div class="form-group">
           <select id="categoria" v-model="productoForm.categoria">
