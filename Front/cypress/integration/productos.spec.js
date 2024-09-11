@@ -16,7 +16,7 @@ describe('Productos', () => {
     cy.get('input#capacidad').should('be.visible').type('500');
     cy.get('textarea#descripcion').should('be.visible').type('Descripción del producto de prueba');
     cy.get('select#categoria').should('be.visible').select('Refresco'); // Ajusta según el nombre de la categoría
-    cy.get('button[type="submit"]').contains('Agregar Bebida').scrollIntoView().should('be.visible').click();
+    cy.get('button[type="submit"]').contains('Guardar').scrollIntoView().should('be.visible').click();
 
     cy.contains('Producto de Prueba').scrollIntoView().should('be.visible');
   });
@@ -24,7 +24,7 @@ describe('Productos', () => {
   it('should edit the product', () => {
     cy.contains('Producto de Prueba').scrollIntoView().should('be.visible').parent().contains('Editar').scrollIntoView().should('be.visible').click();
     cy.get('input#nombre').should('be.visible').clear().type('Producto de Prueba Editado');
-    cy.get('button[type="submit"]').contains('Actualizar Bebida').scrollIntoView().should('be.visible').click();
+    cy.get('button[type="submit"]').contains('Guardar').scrollIntoView().should('be.visible').click();
 
     cy.contains('Producto de Prueba Editado').scrollIntoView().should('be.visible');
   });
