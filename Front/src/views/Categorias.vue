@@ -159,6 +159,7 @@ export default {
 .container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .form-container {
@@ -185,5 +186,20 @@ th, td {
 th {
   background-color: #f2f2f2;
   text-align: left;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .form-container {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
 }
 </style>

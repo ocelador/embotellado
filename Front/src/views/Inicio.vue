@@ -19,6 +19,7 @@ const message = ref('Bienvenido a la factoria de embotellados');
   justify-content: center;
   height: 100vh;
   text-align: center;
+  padding: 20px; 
 }
 
 h1 {
@@ -30,5 +31,25 @@ h1 {
   margin-top: 20px;
   max-width: 100%;
   height: auto;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5em; 
+  }
+
+  .welcome-image {
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2em;
+  }
+
+  .welcome-image {
+    margin-top: 10px;
+  }
 }
 </style>

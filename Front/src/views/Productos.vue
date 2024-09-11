@@ -5,31 +5,31 @@
       <form @submit.prevent="isEditing ? updateProducto() : createProducto()">
         <div>
           <label for="nombre">Nombre:</label>
-          <input type="text" v-model="productoForm.nombre" required />
+          <input type="text" id="nombre" v-model="productoForm.nombre" required />
         </div>
         <div>
           <label for="marca">Marca:</label>
-          <input type="text" v-model="productoForm.marca" required />
+          <input type="text" id="marca" v-model="productoForm.marca" required />
         </div>
         <div>
           <label for="sabor">Sabor:</label>
-          <input type="text" v-model="productoForm.sabor" required />
+          <input type="text" id="sabor" v-model="productoForm.sabor" required />
         </div>
         <div>
           <label for="envase">Envase:</label>
-          <input type="text" v-model="productoForm.envase" required />
+          <input type="text" id="envase" v-model="productoForm.envase" required />
         </div>
         <div>
           <label for="capacidad">Capacidad (ml):</label>
-          <input type="number" v-model="productoForm.capacidad" min="0" required />
+          <input type="number" id="capacidad" v-model="productoForm.capacidad" min="0" required />
         </div>
         <div>
           <label for="descripcion">Descripción:</label><br>
-          <textarea v-model="productoForm.descripcion" rows="4" cols="50"></textarea>
+          <textarea id="descripcion" v-model="productoForm.descripcion" rows="4" cols="40"></textarea>
         </div>
         <div>
           <label for="categoria">Categoría:</label>
-          <select v-model="productoForm.categoria">
+          <select id="categoria" v-model="productoForm.categoria">
             <option v-for="categoria in categorias" :key="categoria.id" :value="categoria">
               {{ categoria.nombre }}
             </option>
@@ -187,17 +187,20 @@ export default {
 .container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .form-container {
   flex: 1;
   margin-right: 20px;
+  min-width: 300px; 
 }
 
 .table-container {
   flex: 2;
   max-height: 400px;
   overflow-y: auto;
+  min-width: 300px; 
 }
 
 table {
@@ -219,5 +222,26 @@ th {
 td {
   max-width: 120px; 
   white-space: normal; 
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; 
+  }
+
+  .form-container, .table-container {
+    margin-right: 0;
+    margin-bottom: 20px; 
+  }
+}
+
+@media (max-width: 480px) {
+  th, td {
+    padding: 2px; 
+  }
+
+  td {
+    max-width: 100px; 
+  }
 }
 </style>

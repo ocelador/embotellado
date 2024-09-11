@@ -5,11 +5,16 @@ import { RouterLink, RouterView } from 'vue-router';
 <template>
   <main>
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
-      <div class="container-fluid d-flex justify-content-center">
-        <RouterLink class="nav-link" active-class="active" to="/">Inicio </RouterLink>
-        <RouterLink class="nav-link" active-class="active" to="/productos">Productos</RouterLink>
-        <RouterLink class="nav-link" active-class="active" to="/categorias">categoría</RouterLink>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <RouterLink class="nav-link" active-class="active" to="/">Inicio</RouterLink>
+          <RouterLink class="nav-link" active-class="active" to="/productos">Productos</RouterLink>
+          <RouterLink class="nav-link" active-class="active" to="/categorias">Categoría</RouterLink>
+        </div>
       </div>
     </nav>
     
@@ -53,5 +58,15 @@ a {
 .nav-link.active {
   color: #007bff;
   font-weight: bold;
+}
+
+@media (max-width: 992px) {
+  .navbar-nav {
+    text-align: center;
+  }
+  
+  .nav-link {
+    padding: 10px 0;
+  }
 }
 </style>
