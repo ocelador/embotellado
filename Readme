@@ -7,7 +7,6 @@ DB:
 Back: 
 - base de datos de H2
 - no se puede borrar categoria con producto
-- usar jsonview
 
 Front: 
 - maestro detalle

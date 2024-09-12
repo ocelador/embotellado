@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div v-if="showMessage" class="message">{{ messageText }}</div>
     <div class="form-container">
       <h2>{{ isEditing ? 'Editar' : 'Agregar' }}</h2>
       <form @submit.prevent="isEditing ? updateCategoria() : createCategoria()" class="form-content">
@@ -64,20 +65,32 @@
             <td><span class="symbol">{{ categoria.is00 ? '✔' : '✗' }}</span></td>
             <td>
               <button class="btn button-standard button-edit" @click="editCategoria(categoria)">Editar</button>
-              <button class="btn button-standard button-delete" @click="deleteCategoria(categoria.id)" :disabled="categoria.hasProductos">Eliminar</button>
+              <button class="btn button-standard button-delete" @click="showDeleteModal(categoria.id)">Eliminar</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <Modal
+      :visible="isModalVisible"
+      :title="modalTitle"
+      :message="modalMessage"
+      @cancel="isModalVisible = false"
+      @confirm="handleModalConfirm"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Modal from '@/components/Modal.vue';
 
 export default {
   name: "Categorias",
+  components: {
+    Modal
+  },
   data() {
     return {
       categorias: [],
@@ -90,7 +103,13 @@ export default {
         isAlcohólica: false,
         is00: false
       },
-      isEditing: false
+      isEditing: false,
+      isModalVisible: false,
+      categoriaToDelete: null,
+      modalTitle: 'Confirmar Eliminación',
+      modalMessage: '¿Estás seguro de que deseas eliminar esta categoría?',
+      showMessage: false,
+      messageText: ''
     };
   },
   created() {
@@ -100,18 +119,7 @@ export default {
     async fetchCategorias() {
       try {
         const response = await axios.get('/api/categorias');
-        const categorias = response.data;
-
-        // Obtener productos para verificar asociaciones
-        const productosResponse = await axios.get('/api/productos');
-        const productos = productosResponse.data;
-
-        // Agregar una bandera a cada categoría para indicar si tiene productos asociados
-        categorias.forEach(categoria => {
-          categoria.hasProductos = productos.some(producto => producto.categoria.id === categoria.id);
-        });
-
-        this.categorias = categorias;
+        this.categorias = response.data;
       } catch (error) {
         console.error('Error fetching categorias:', error);
       }
@@ -121,6 +129,11 @@ export default {
         const response = await axios.post('/api/categorias', this.categoriaForm);
         this.categorias.push(response.data);
         this.resetForm();
+        this.showMessage = true;
+        this.messageText = 'Categoría creada exitosamente';
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 3000);
       } catch (error) {
         console.error('Error creating categoria:', error.response ? error.response.data : error.message);
       }
@@ -133,18 +146,43 @@ export default {
           this.categorias[index] = response.data;
         }
         this.resetForm();
+        this.showMessage = true;
+        this.messageText = 'Categoría actualizada exitosamente';
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 3000);
       } catch (error) {
         console.error('Error updating categoria:', error.response ? error.response.data : error.message);
       }
     },
-    async deleteCategoria(id) {
-      if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
+    async showDeleteModal(id) {
+      this.categoriaToDelete = id;
+      try {
+        const response = await axios.get(`/api/productos?categoriaId=${id}`);
+        if (response.data.length > 0) {
+          this.modalMessage = 'No puedes eliminar esta categoría porque tiene productos asociados.';
+          this.modalTitle = 'Error';
+        } else {
+          this.modalMessage = '¿Estás seguro de que deseas eliminar esta categoría?';
+          this.modalTitle = 'Confirmar Eliminación';
+        }
+        this.isModalVisible = true;
+      } catch (error) {
+        console.error('Error checking productos:', error.response ? error.response.data : error.message);
+      }
+    },
+    async handleModalConfirm() {
+      if (this.modalTitle === 'Confirmar Eliminación') {
         try {
-          await axios.delete(`/api/categorias/${id}`);
-          this.categorias = this.categorias.filter(c => c.id !== id);
+          await axios.delete(`/api/categorias/${this.categoriaToDelete}`);
+          this.categorias = this.categorias.filter(c => c.id !== this.categoriaToDelete);
+          this.isModalVisible = false;
+          this.categoriaToDelete = null;
         } catch (error) {
           console.error('Error deleting categoria:', error.response ? error.response.data : error.message);
         }
+      } else {
+        this.isModalVisible = false;
       }
     },
     editCategoria(categoria) {
@@ -168,6 +206,19 @@ export default {
 </script>
 
 <style scoped>
+.message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* Otros estilos existentes */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 html, body, #app {

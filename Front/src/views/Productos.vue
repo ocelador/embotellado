@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div v-if="showMessage" class="message">{{ messageText }}</div>
     <div class="form-container">
       <h2>{{ isEditing ? 'Editar' : 'Agregar' }}</h2>
       <form @submit.prevent="isEditing ? updateProducto() : createProducto()" class="form-content">
@@ -62,20 +63,32 @@
             <td>{{ producto.categoria.nombre }}</td>
             <td>
               <button class="button-standard button-edit" @click="editProducto(producto)">Editar</button>
-              <button class="button-standard button-delete" @click="deleteProducto(producto.id)">Eliminar</button>
+              <button class="button-standard button-delete" @click="showDeleteModal(producto.id)">Eliminar</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <Modal
+      :visible="isModalVisible"
+      title="Confirmar Eliminación"
+      message="¿Estás seguro de que deseas eliminar este producto?"
+      @cancel="isModalVisible = false"
+      @confirm="confirmDeleteProducto"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Modal from '@/components/Modal.vue';
 
 export default {
   name: "Productos",
+  components: {
+    Modal
+  },
   data() {
     return {
       productos: [],
@@ -90,7 +103,11 @@ export default {
         descripcion: '',
         categoria: null
       },
-      isEditing: false
+      isEditing: false,
+      isModalVisible: false,
+      productoToDelete: null,
+      showMessage: false,
+      messageText: ''
     };
   },
   created() {
@@ -123,6 +140,11 @@ export default {
         });
         this.productos.push(response.data);
         this.resetForm();
+        this.showMessage = true;
+        this.messageText = 'Producto creado exitosamente';
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 3000);
       } catch (error) {
         console.error('Error creating producto:', error.response ? error.response.data : error.message);
       }
@@ -143,18 +165,27 @@ export default {
           this.productos[index] = response.data;
         }
         this.resetForm();
+        this.showMessage = true;
+        this.messageText = 'Producto actualizado exitosamente';
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 3000);
       } catch (error) {
         console.error('Error updating producto:', error.response ? error.response.data : error.message);
       }
     },
-    async deleteProducto(id) {
-      if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-        try {
-          await axios.delete(`/api/productos/${id}`);
-          this.productos = this.productos.filter(p => p.id !== id);
-        } catch (error) {
-          console.error('Error deleting producto:', error.response ? error.response.data : error.message);
-        }
+    showDeleteModal(id) {
+      this.productoToDelete = id;
+      this.isModalVisible = true;
+    },
+    async confirmDeleteProducto() {
+      try {
+        await axios.delete(`/api/productos/${this.productoToDelete}`);
+        this.productos = this.productos.filter(p => p.id !== this.productoToDelete);
+        this.isModalVisible = false;
+        this.productoToDelete = null;
+      } catch (error) {
+        console.error('Error deleting producto:', error.response ? error.response.data : error.message);
       }
     },
     editProducto(producto) {
@@ -261,7 +292,7 @@ td {
 }
 
 .capacidad-cell {
-  text-align: left;
+  text-align: left; /* Alinea el texto a la derecha */
 }
 
 button {
@@ -394,6 +425,17 @@ button {
   display: flex;
   justify-content: space-between;
   margin-top: auto;
+}
+.message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
 @media (max-width: 768px) {
