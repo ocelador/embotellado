@@ -306,6 +306,26 @@ button:active {
   box-sizing: border-box;
 }
 
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group input {
+  flex: 1;
+}
+
+.input-group-text {
+  margin-left: 5px;
+  font-size: 0.9em;
+  border: none;
+  background-color: transparent;
+}
+
+.small-input-group input {
+  flex: 0.5;
+}
+
 .checkbox-group {
   display: flex;
   align-items: center;
