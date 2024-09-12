@@ -1,36 +1,30 @@
 describe('Productos', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/productos');
   });
 
-  it('should display the form and table', () => {
-    cy.get('.form-container').should('be.visible');
-    cy.get('.table-container').should('be.visible');
-  });
-
-  it('should create a new product', () => {
-    cy.get('input#nombre').should('be.visible').type('Producto de Prueba');
-    cy.get('input#marca').should('be.visible').type('Marca de Prueba');
-    cy.get('input#sabor').should('be.visible').type('Sabor de Prueba');
-    cy.get('input#envase').should('be.visible').type('Envase de Prueba');
-    cy.get('input#capacidad').should('be.visible').type('500');
-    cy.get('textarea#descripcion').should('be.visible').type('Descripción del producto de prueba');
-    cy.get('select#categoria').should('be.visible').select('Refresco'); // Ajusta según el nombre de la categoría
+  it('should create, edit, and delete the last product', () => {
+    // Crear producto
+    cy.get('input#nombre').scrollIntoView().should('be.visible').type('Producto de Prueba');
+    cy.get('input#marca').scrollIntoView().should('be.visible').type('Marca de Prueba');
+    cy.get('input#sabor').scrollIntoView().should('be.visible').type('Sabor de Prueba');
+    cy.get('input#envase').scrollIntoView().should('be.visible').type('Envase de Prueba');
+    cy.get('input#capacidad').scrollIntoView().should('be.visible').type('500');
+    cy.get('textarea#descripcion').scrollIntoView().should('be.visible').type('Descripción del producto de prueba');
+    cy.get('select#categoria').scrollIntoView().should('be.visible').select('Refresco'); 
     cy.get('button[type="submit"]').contains('Guardar').scrollIntoView().should('be.visible').click();
-
     cy.contains('Producto de Prueba').scrollIntoView().should('be.visible');
-  });
 
-  it('should edit the product', () => {
-    cy.contains('Producto de Prueba').scrollIntoView().should('be.visible').parent().contains('Editar').scrollIntoView().should('be.visible').click();
-    cy.get('input#nombre').should('be.visible').clear().type('Producto de Prueba Editado');
+    // Editar el último producto
+    cy.get('tr').last().contains('Editar').scrollIntoView().should('be.visible').click();
+    cy.get('input#nombre').scrollIntoView().should('be.visible').clear().type('Producto de Prueba Editado');
     cy.get('button[type="submit"]').contains('Guardar').scrollIntoView().should('be.visible').click();
-
     cy.contains('Producto de Prueba Editado').scrollIntoView().should('be.visible');
-  });
 
-  it('should delete the product', () => {
-    cy.contains('Producto de Prueba Editado').scrollIntoView().should('be.visible').parent().contains('Eliminar').scrollIntoView().should('be.visible').click();
+    // Eliminar el último producto
+    cy.get('tr').last().contains('Eliminar').scrollIntoView().should('be.visible').click();
+    cy.get('.modal-container').should('be.visible');
+    cy.get('.modal-footer .btn-primary').contains('Confirmar').click();
     cy.contains('Producto de Prueba Editado').should('not.exist');
   });
 });

@@ -144,7 +144,7 @@ export default {
         this.messageText = 'Producto creado exitosamente';
         setTimeout(() => {
           this.showMessage = false;
-        }, 3000);
+        }, 5000);
       } catch (error) {
         console.error('Error creating producto:', error.response ? error.response.data : error.message);
       }
@@ -169,7 +169,7 @@ export default {
         this.messageText = 'Producto actualizado exitosamente';
         setTimeout(() => {
           this.showMessage = false;
-        }, 3000);
+        }, 5000);
       } catch (error) {
         console.error('Error updating producto:', error.response ? error.response.data : error.message);
       }
@@ -184,6 +184,11 @@ export default {
         this.productos = this.productos.filter(p => p.id !== this.productoToDelete);
         this.isModalVisible = false;
         this.productoToDelete = null;
+        this.showMessage = true;
+        this.messageText = 'Producto eliminado exitosamente';
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 5000);
       } catch (error) {
         console.error('Error deleting producto:', error.response ? error.response.data : error.message);
       }
@@ -292,7 +297,7 @@ td {
 }
 
 .capacidad-cell {
-  text-align: left; /* Alinea el texto a la derecha */
+  text-align: left;
 }
 
 button {

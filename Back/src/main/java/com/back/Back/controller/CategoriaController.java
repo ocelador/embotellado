@@ -53,12 +53,12 @@ public class CategoriaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategoria(@PathVariable Long id) {
+    public ResponseEntity<String> deleteCategoria(@PathVariable Long id) {
         boolean deleted = categoriaService.deleteCategoria(id);
         if (deleted) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.status(409).build(); // 409 Conflict
+            return ResponseEntity.ok("No se puede eliminar la categoría porque tiene productos asociados.");
         }
     }
 }

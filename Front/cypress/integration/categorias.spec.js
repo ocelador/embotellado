@@ -3,29 +3,23 @@ describe('Categorias', () => {
     cy.visit('/categorias');
   });
 
-  it('should display the form and table', () => {
-    cy.get('.form-container').should('be.visible');
-    cy.get('.table-container').should('be.visible');
-  });
-
-  it('should create a new category', () => {
-    cy.get('input[placeholder="Nombre"]').type('Nueva Categoria');
-    cy.get('textarea[placeholder="Descripción"]').type('Descripción de la nueva categoría');
-    cy.get('button[type="submit"]').click();
-
+  it('should create, edit, and delete the last category', () => {
+    // Crear categoría
+    cy.get('input[placeholder="Nombre"]').scrollIntoView().should('be.visible').type('Nueva Categoria');
+    cy.get('textarea[placeholder="Descripción"]').scrollIntoView().should('be.visible').type('Descripción de la nueva categoría');
+    cy.get('button[type="submit"]').scrollIntoView().should('be.visible').click();
     cy.contains('Nueva Categoria').scrollIntoView().should('be.visible');
-  });
 
-  it('should edit an existing category', () => {
-    cy.contains('Editar').scrollIntoView().click();
-    cy.get('input[placeholder="Nombre"]').clear().type('Categoria Editada');
-    cy.get('button[type="submit"]').click();
-
+    // Editar la última categoría
+    cy.get('tr').last().contains('Editar').scrollIntoView().should('be.visible').click();
+    cy.get('input[placeholder="Nombre"]').scrollIntoView().should('be.visible').clear().type('Categoria Editada');
+    cy.get('button[type="submit"]').scrollIntoView().should('be.visible').click();
     cy.contains('Categoria Editada').scrollIntoView().should('be.visible');
-  });
 
-  it('should delete a category', () => {
-    cy.contains('Eliminar').scrollIntoView().click();
+    // Eliminar la última categoría
+    cy.get('tr').last().contains('Eliminar').scrollIntoView().should('be.visible').click();
+    cy.get('.modal-container').should('be.visible');
+    cy.get('.modal-footer .btn-primary').contains('Confirmar').click();
     cy.contains('Categoria Editada').should('not.exist');
   });
 });

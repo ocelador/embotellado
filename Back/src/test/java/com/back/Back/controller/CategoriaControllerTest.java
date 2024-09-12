@@ -96,8 +96,8 @@ public class CategoriaControllerTest {
     @Test
     public void testDeleteCategoria() {
         when(categoriaService.deleteCategoria(1L)).thenReturn(true);
-
-        ResponseEntity<Void> response = categoriaController.deleteCategoria(1L);
+    
+        ResponseEntity<String> response = categoriaController.deleteCategoria(1L);
         assertEquals(204, response.getStatusCode().value());
         verify(categoriaService, times(1)).deleteCategoria(1L);
     }
@@ -106,8 +106,9 @@ public class CategoriaControllerTest {
     public void testDeleteCategoria_Conflict() {
         when(categoriaService.deleteCategoria(1L)).thenReturn(false);
 
-        ResponseEntity<Void> response = categoriaController.deleteCategoria(1L);
-        assertEquals(409, response.getStatusCode().value());
+        ResponseEntity<String> response = categoriaController.deleteCategoria(1L);
+        assertEquals(200, response.getStatusCode().value());
+        assertEquals("No se puede eliminar la categoría porque tiene productos asociados.", response.getBody());
         verify(categoriaService, times(1)).deleteCategoria(1L);
     }
 }

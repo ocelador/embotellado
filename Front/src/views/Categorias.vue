@@ -77,7 +77,7 @@
       :title="modalTitle"
       :message="modalMessage"
       @cancel="isModalVisible = false"
-      @confirm="handleModalConfirm"
+      @confirm="confirmDeleteCategoria"
     />
   </div>
 </template>
@@ -104,12 +104,12 @@ export default {
         is00: false
       },
       isEditing: false,
+      showMessage: false,
+      messageText: '',
       isModalVisible: false,
-      categoriaToDelete: null,
       modalTitle: 'Confirmar Eliminación',
       modalMessage: '¿Estás seguro de que deseas eliminar esta categoría?',
-      showMessage: false,
-      messageText: ''
+      categoriaToDelete: null
     };
   },
   created() {
@@ -133,7 +133,7 @@ export default {
         this.messageText = 'Categoría creada exitosamente';
         setTimeout(() => {
           this.showMessage = false;
-        }, 3000);
+        }, 5000);
       } catch (error) {
         console.error('Error creating categoria:', error.response ? error.response.data : error.message);
       }
@@ -150,39 +150,32 @@ export default {
         this.messageText = 'Categoría actualizada exitosamente';
         setTimeout(() => {
           this.showMessage = false;
-        }, 3000);
+        }, 5000);
       } catch (error) {
         console.error('Error updating categoria:', error.response ? error.response.data : error.message);
       }
     },
-    async showDeleteModal(id) {
+    showDeleteModal(id) {
       this.categoriaToDelete = id;
-      try {
-        const response = await axios.get(`/api/productos?categoriaId=${id}`);
-        if (response.data.length > 0) {
-          this.modalMessage = 'No puedes eliminar esta categoría porque tiene productos asociados.';
-          this.modalTitle = 'Error';
-        } else {
-          this.modalMessage = '¿Estás seguro de que deseas eliminar esta categoría?';
-          this.modalTitle = 'Confirmar Eliminación';
-        }
-        this.isModalVisible = true;
-      } catch (error) {
-        console.error('Error checking productos:', error.response ? error.response.data : error.message);
-      }
+      this.isModalVisible = true;
     },
-    async handleModalConfirm() {
-      if (this.modalTitle === 'Confirmar Eliminación') {
-        try {
-          await axios.delete(`/api/categorias/${this.categoriaToDelete}`);
+    async confirmDeleteCategoria() {
+      try {
+        const response = await axios.delete(`/api/categorias/${this.categoriaToDelete}`);
+        if (response.status === 204) {
           this.categorias = this.categorias.filter(c => c.id !== this.categoriaToDelete);
-          this.isModalVisible = false;
-          this.categoriaToDelete = null;
-        } catch (error) {
-          console.error('Error deleting categoria:', error.response ? error.response.data : error.message);
+          this.messageText = 'Categoría eliminada exitosamente';
+        } else {
+          this.messageText = response.data;
         }
-      } else {
         this.isModalVisible = false;
+        this.categoriaToDelete = null;
+        this.showMessage = true;
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 5000);
+      } catch (error) {
+        console.error('Error deleting categoria:', error.response ? error.response.data : error.message);
       }
     },
     editCategoria(categoria) {
@@ -206,6 +199,8 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 .message {
   position: fixed;
   top: 20px;
@@ -217,9 +212,6 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
-
-/* Otros estilos existentes */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 html, body, #app {
   height: 100%;
@@ -309,7 +301,7 @@ button {
 
 .button-standard {
   width: 120px;
-  height: 40px; 
+  height: 40px;
 }
 
 .button-edit {
