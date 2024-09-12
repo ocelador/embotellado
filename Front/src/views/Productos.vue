@@ -30,8 +30,8 @@
           </select>
         </div>
         <div class="form-actions">
-          <button type="submit" class="button-standard">Guardar</button>
-          <button type="button" class="button-standard" @click="resetForm">Cancelar</button>
+          <button type="submit" class="button-standard button-save">Guardar</button>
+          <button type="button" class="button-standard button-cancel" @click="resetForm">Cancelar</button>
         </div>
       </form>
     </div>
@@ -259,7 +259,6 @@ td {
 }
 
 button {
-  background-color: #007bff;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -269,17 +268,57 @@ button {
   transition: background-color 0.3s ease-in-out;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
-
-button:active {
-  background-color: #004085;
-}
-
 .button-standard {
   width: 100px;
   height: 40px; 
+}
+
+.button-edit {
+  background-color: #28a745; 
+}
+
+.button-edit:hover {
+  background-color: #218838;
+}
+
+.button-edit:active {
+  background-color: #1e7e34;
+}
+
+.button-delete {
+  background-color: #dc3545;
+}
+
+.button-delete:hover {
+  background-color: #c82333;
+}
+
+.button-delete:active {
+  background-color: #bd2130;
+}
+
+.button-save {
+  background-color: #007bff; 
+}
+
+.button-save:hover {
+  background-color: #0056b3;
+}
+
+.button-save:active {
+  background-color: #004085;
+}
+
+.button-cancel {
+  background-color: #ffc107; 
+}
+
+.button-cancel:hover {
+  background-color: #e0a800;
+}
+
+.button-cancel:active {
+  background-color: #c69500; 
 }
 
 .symbol {
