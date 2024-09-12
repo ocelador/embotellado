@@ -127,11 +127,13 @@ export default {
       }
     },
     async deleteCategoria(id) {
-      try {
-        await axios.delete(`/api/categorias/${id}`);
-        this.categorias = this.categorias.filter(c => c.id !== id);
-      } catch (error) {
-        console.error('Error deleting categoria:', error.response ? error.response.data : error.message);
+      if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
+        try {
+          await axios.delete(`/api/categorias/${id}`);
+          this.categorias = this.categorias.filter(c => c.id !== id);
+        } catch (error) {
+          console.error('Error deleting categoria:', error.response ? error.response.data : error.message);
+        }
       }
     },
     editCategoria(categoria) {

@@ -148,11 +148,13 @@ export default {
       }
     },
     async deleteProducto(id) {
-      try {
-        await axios.delete(`/api/productos/${id}`);
-        this.productos = this.productos.filter(p => p.id !== id);
-      } catch (error) {
-        console.error('Error deleting producto:', error.response ? error.response.data : error.message);
+      if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+        try {
+          await axios.delete(`/api/productos/${id}`);
+          this.productos = this.productos.filter(p => p.id !== id);
+        } catch (error) {
+          console.error('Error deleting producto:', error.response ? error.response.data : error.message);
+        }
       }
     },
     editProducto(producto) {
