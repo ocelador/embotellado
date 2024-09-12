@@ -57,7 +57,7 @@
             <td>{{ producto.marca }}</td>
             <td>{{ producto.sabor }}</td>
             <td>{{ producto.envase }}</td>
-            <td>{{ producto.capacidad }} ml</td>
+            <td class="capacidad-cell">{{ producto.capacidad }}</td>
             <td>{{ producto.descripcion }}</td>
             <td>{{ producto.categoria.nombre }}</td>
             <td>
@@ -260,6 +260,10 @@ td {
   white-space: normal;
 }
 
+.capacidad-cell {
+  text-align: left;
+}
+
 button {
   color: #ffffff;
   border: none;
@@ -345,6 +349,10 @@ button {
   border: 1px solid #b0b0b0;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+.form-group select {
+  background-color: #ffffff; 
 }
 
 .input-group {

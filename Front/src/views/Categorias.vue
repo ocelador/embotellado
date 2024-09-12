@@ -64,7 +64,7 @@
             <td><span class="symbol">{{ categoria.is00 ? '✔' : '✗' }}</span></td>
             <td>
               <button class="btn button-standard button-edit" @click="editCategoria(categoria)">Editar</button>
-              <button class="btn button-standard button-delete" @click="deleteCategoria(categoria.id)">Eliminar</button>
+              <button class="btn button-standard button-delete" @click="deleteCategoria(categoria.id)" :disabled="categoria.hasProductos">Eliminar</button>
             </td>
           </tr>
         </tbody>
@@ -100,7 +100,18 @@ export default {
     async fetchCategorias() {
       try {
         const response = await axios.get('/api/categorias');
-        this.categorias = response.data;
+        const categorias = response.data;
+
+        // Obtener productos para verificar asociaciones
+        const productosResponse = await axios.get('/api/productos');
+        const productos = productosResponse.data;
+
+        // Agregar una bandera a cada categoría para indicar si tiene productos asociados
+        categorias.forEach(categoria => {
+          categoria.hasProductos = productos.some(producto => producto.categoria.id === categoria.id);
+        });
+
+        this.categorias = categorias;
       } catch (error) {
         console.error('Error fetching categorias:', error);
       }
